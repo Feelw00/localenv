@@ -8,10 +8,10 @@
 git clone https://github.com/Feelw00/local-databases.git
 ```
 
-### keep 파일 삭제
+### 볼륨 생성
 
 ```bash
-find . -name .gitkeep -exec rm -f {} \;
+./prepare_volumes.sh
 ```
 
 ## 실행
