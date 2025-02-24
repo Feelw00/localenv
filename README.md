@@ -11,7 +11,7 @@ git clone https://github.com/Feelw00/local-databases.git
 ### 볼륨 생성
 
 ```bash
-./prepare_volumes.sh
+sh prepare_volumes.sh
 ```
 
 ## 실행
