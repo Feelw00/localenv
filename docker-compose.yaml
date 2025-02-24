@@ -1,0 +1,92 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    cpus: "0.5"
+    mem_limit: "0.5g"
+    ports:
+      - 3306:3306
+    volumes:
+      - './mariadb/initdb.d:/docker-entrypoint-initdb.d'
+      - "./mariadb/conf.d:/etc/mysql/conf.d"
+      - "./mariadb/data:/var/lib/mysql"
+    environment:
+      MARIADB_ROOT_PASSWORD: "QWER1qaz@#$R"
+      MYSQL_USER: "writer"
+      MYSQL_PASSWORD: "QWER1qaz@#$"
+    networks:
+      - local_shared_network
+  postgres:
+    image: postgres:15.5-alpine
+    container_name: postgres
+    restart: always
+    cpus: "0.5"
+    mem_limit: "0.5g"
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "QWER1qaz@#$"
+    networks:
+      - local_shared_network
+  redis:
+    image: redis
+    container_name: redis
+    cpus: "0.5"
+    mem_limit: "0.5g"
+    ports:
+      - "6379:6379"
+    networks:
+      - local_shared_network
+  # mongo:
+  #   image: mongo
+  #   container_name: mongo
+  #   cpus: "0.5"
+  #   mem_limit: "0.5g"
+  #   ports:
+  #     - "27017:27017"
+  #   networks:
+  #     - local_shared_network
+  # valkey:
+  #   image: valkey/valkey:8.0.1-alpine
+  #   container_name: valkey
+  #   cpus: "0.5"
+  #   mem_limit: "0.5g"
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - local_shared_network
+  # postgis:
+  #   image: postgis/postgis:15-3.3-alpine
+  #   container_name: postgis
+  #   restart: always
+  #   cpus: "0.5"
+  #   mem_limit: "0.5g"
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ./postgres/data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_USER: "root"
+  #     POSTGRES_PASSWORD: "QWER1qaz@#$"
+  #   networks:
+  #     - local_shared_network
+  # sqs:
+  #   image: 'localstack/localstack'
+  #   container_name: 'localstack'
+  #   environment:
+  #     - SERVICES=sqs
+  #     - DEFAULT_REGION=ap-northeast-2
+  #     - DEBUG=1
+  #     - DATA_DIR=/tmp/localstack/data
+  #     - AWS_ACCESS_KEY_ID=asdf
+  #     - AWS_SECRET_ACCESS_KEY=asdf1234
+  #     - AWS_DEFAULT_REGION=ap-northeast-2
+  #   ports:
+  #     - '4566:4566'
+networks:
+  local_shared_network:
+    external: false

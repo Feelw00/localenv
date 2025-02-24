@@ -1,0 +1,5 @@
+mariadb/data/*
+mariadb/import/*.sql
+mariadb/import/*.csv
+postgres/data/*
+!.gitkeep
