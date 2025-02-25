@@ -16,6 +16,12 @@ sh prepare_volumes.sh
 
 ## 실행
 
+### 컨테이너 빌드
+
+```bash
+docker compose build --no-cache
+```
+
 ### Compose 실행
 
 ```bash
